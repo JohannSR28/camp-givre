@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { startGame } from '../lib/game';
+import { startGame } from '../src/game/engine';
 
 export default function Game() {
   useEffect(() => startGame(), []);
@@ -19,11 +19,12 @@ export default function Game() {
           </svg>
         </button>
         <div className="res">
-          {['cash', 'wood', 'meat', 'gold', 'plank', 'steak', 'ingot', 'tool'].map((k) => (
+          {['cash', 'wood', 'meat', 'gold', 'plank', 'steak', 'ingot', 'tool'].map((k) => [
             <div key={k} className="pill" id={'p-' + k} hidden={k !== 'cash' && k !== 'wood'}>
               <img alt="" /><b>0</b>
-            </div>
-          ))}
+            </div>,
+            k === 'cash' && <div key="income" id="income" className="income" hidden>+0 $/s</div>,
+          ])}
         </div>
         <div id="toast"></div>
         <div id="hint">Glisse pour bouger</div>
